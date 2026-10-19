@@ -1,0 +1,37 @@
+/* =========================================================
+   NIVEL 1 · Definición por penales (dominio operativo)
+   Cada situación: sport, q (enunciado), opts (3 opciones),
+   ans (índice de la correcta en opts), exp (explicación).
+   ========================================================= */
+const L1 = [
+  {sport:"Fútbol", q:"El DT ya tiene a sus 5 cobradores para la tanda. Falta decidir el orden de los 5 disparos. ¿Cuántos órdenes distintos hay?",
+   opts:["120","25","60"], ans:0,
+   exp:`Se ordenan los 5 cobradores completos: ${P(5)} = 5! = 5·4·3·2·1 = <b>120</b>. 25 = 5² supondría repetir cobrador; 60 = ${V(5,3)} ordena solo 3 turnos.`},
+  {sport:"Atletismo", q:"En la final de 100 m corren 8 atletas. ¿Cuántos podios distintos (oro, plata, bronce) pueden darse?",
+   opts:["56","336","512"], ans:1,
+   exp:`Se eligen 3 de 8 y la medalla los distingue: ${V(8,3)} = ${fr("8!","5!")} = 8·7·6 = <b>336</b>. 56 = ${C(8,3)} ignora qué medalla gana cada uno; 512 = 8³ permitiría que un atleta gane dos medallas.`},
+  {sport:"Baloncesto", q:"Un plantel tiene 12 jugadores. ¿Cuántos quintetos titulares distintos se pueden formar, sin asignar posiciones?",
+   opts:["95 040","792","60"], ans:1,
+   exp:`Un quinteto es un grupo: ${C(12,5)} = ${fr("12!","5!·7!")} = ${fr("12·11·10·9·8","120")} = <b>792</b>. 95 040 = ${V(12,5)} contaría cada quinteto 5! = 120 veces.`},
+  {sport:"Tenis", q:"Un torneo round robin de 6 tenistas: cada pareja juega exactamente un partido. ¿Cuántos partidos se programan?",
+   opts:["15","30","36"], ans:0,
+   exp:`Un partido es una pareja sin orden (A–B = B–A): ${C(6,2)} = ${fr("6·5","2")} = <b>15</b>. 30 = ${V(6,2)} contaría cada partido dos veces.`},
+  {sport:"Fútbol", q:"Una liga de 10 equipos juega ida y vuelta: cada pareja se enfrenta una vez en cada estadio. ¿Cuántos partidos hay en total?",
+   opts:["45","100","90"], ans:2,
+   exp:`Local y visitante distinguen el partido, así que el orden importa: ${V(10,2)} = 10·9 = <b>90</b>. 45 = ${C(10,2)} sería solo ida; 100 = 10² incluiría a un equipo contra sí mismo.`},
+  {sport:"Fútbol americano", q:"El quarterback tiene 7 receptores elegibles y designa un receptor principal y uno secundario. ¿Cuántas designaciones distintas hay?",
+   opts:["42","21","49"], ans:0,
+   exp:`Principal y secundario son roles distintos: ${V(7,2)} = ${fr("7!","5!")} = 7·6 = <b>42</b>. 21 = ${C(7,2)} olvida quién es el principal; 49 = 7² permitiría al mismo receptor en ambos roles.`},
+  {sport:"Atletismo", q:"El relevo 4×100 ya tiene a sus 4 atletas. ¿De cuántas formas puede asignarse quién corre cada posta?",
+   opts:["16","4","24"], ans:2,
+   exp:`Se ordenan los 4 atletas en las 4 postas: ${P(4)} = 4! = 4·3·2·1 = <b>24</b>. 16 = 4² y 4 = n confunden la potencia o el número de elementos con el factorial.`},
+  {sport:"Baloncesto", q:"Para una sesión de tiros libres, el entrenador elige 4 jugadores de un grupo de 9. Todos lanzan a la vez en canastas iguales. ¿Cuántos grupos posibles?",
+   opts:["126","3 024","36"], ans:0,
+   exp:`Sin turnos ni roles, solo importa quiénes: ${C(9,4)} = ${fr("9·8·7·6","4!")} = ${fr("3024","24")} = <b>126</b>. 3 024 = ${V(9,4)} es el numerador antes de dividir por 4!.`},
+  {sport:"Fútbol", q:"De los 11 titulares se nombran capitán, subcapitán y tercer capitán. ¿Cuántas ternas de mando distintas existen?",
+   opts:["165","990","1 331"], ans:1,
+   exp:`Tres cargos distintos para 3 de 11 jugadores: ${V(11,3)} = 11·10·9 = <b>990</b>. 165 = ${C(11,3)} ignora los cargos; 1 331 = 11³ permite repetir jugador.`},
+  {sport:"Atletismo", q:"El control antidopaje sortea 4 atletas entre los 10 finalistas para pruebas idénticas. ¿Cuántas muestras distintas pueden salir?",
+   opts:["5 040","210","40"], ans:1,
+   exp:`Las pruebas son idénticas, así que solo importa el grupo: ${C(10,4)} = ${fr("10·9·8·7","24")} = <b>210</b>. 5 040 = ${V(10,4)} supondría un orden de sorteo relevante.`},
+];
